@@ -48,9 +48,11 @@ android {
         }
     }
 }
-
 dependencies {
+    implementation(libs.androidx.navigation.compose)
+    androidTestImplementation(libs.androidx.espresso.core) // Remove version specification to let it align with other dependencies
 
+// Update other dependencies to align with the latest versions
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -61,33 +63,21 @@ dependencies {
     implementation(libs.androidx.material3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.espresso.core) // Add again without version specification
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    //
+
+        implementation (libs.retrofit)
+        implementation (libs.converter.gson)
+
+
+    //
+
+
 }
 
-dependencies {
-    implementation (libs.ui)
-    implementation (libs.androidx.material)
-    implementation (libs.ui.tooling)
-    implementation (libs.androidx.runtime.livedata)
-    implementation (libs.androidx.runtime)
-    implementation (libs.androidx.activity.compose.v131)
-    implementation (libs.androidx.lifecycle.viewmodel.compose)
-    implementation (libs.androidx.navigation.compose)
-    implementation (libs.androidx.constraintlayout.compose)
-    implementation (libs.accompanist.glide)
-    implementation (libs.retrofit)
-    implementation (libs.converter.gson)
-    implementation (libs.kotlinx.coroutines.core)
-    implementation (libs.kotlinx.coroutines.android)
-    implementation (libs.androidx.lifecycle.livedata.ktx)
-    implementation (libs.androidx.lifecycle.viewmodel.ktx)
-    implementation (libs.androidx.activity.ktx)
-    implementation (libs.ui.test.junit4)
-    testImplementation (libs.junit)
-    androidTestImplementation (libs.androidx.junit.v113)
-    androidTestImplementation (libs.androidx.espresso.core.v340)
-}
+
+
