@@ -14,7 +14,6 @@ class DogRepository {
         return withContext(Dispatchers.IO) {
             val response = dogApiService.getAllDogBreeds()
             val breedMap = response.message // This is a map of breed groups to lists of breeds
-            // Extract all breeds from the map
             breedMap.values.flatten()
         }
     }

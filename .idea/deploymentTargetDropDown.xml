@@ -2,16 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="DogBreedApp">
+      <entry key="DogBreedApp (1)">
         <State />
       </entry>
-      <entry key="DogListScreen">
+      <entry key="DogBreedItemPreview">
+        <State />
+      </entry>
+      <entry key="DogBreeds1App">
+        <State />
+      </entry>
+      <entry key="DogBreedsApp">
         <State />
       </entry>
       <entry key="DogListScreenPreview">
-        <State />
-      </entry>
-      <entry key="MainActivity">
         <State />
       </entry>
       <entry key="app">

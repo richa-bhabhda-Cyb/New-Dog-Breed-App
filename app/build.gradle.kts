@@ -48,36 +48,36 @@ android {
         }
     }
 }
+
 dependencies {
+    // AndroidX Dependencies
+
+    implementation (libs.androidx.core.ktx)
+    implementation (libs.androidx.lifecycle.runtime.ktx)
+    implementation (libs.androidx.activity.compose.v140)
+    implementation (libs.ui)
+    implementation (libs.ui.graphics)
+    implementation (libs.ui.tooling)
+    implementation (libs.material3)
     implementation(libs.androidx.navigation.compose)
-    androidTestImplementation(libs.androidx.espresso.core) // Remove version specification to let it align with other dependencies
+    androidTestImplementation (libs.androidx.junit.v113)
+    androidTestImplementation (libs.androidx.espresso.core.v340)
+    androidTestImplementation (libs.ui.test.junit4)
+    debugImplementation (libs.androidx.ui.tooling.v110alpha04)
 
-// Update other dependencies to align with the latest versions
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core) // Add again without version specification
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
-    //
+    // Retrofit and Gson dependencies
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
 
-        implementation (libs.retrofit)
-        implementation (libs.converter.gson)
+        implementation(libs.androidx.navigation.compose)
 
 
-    //
+        implementation (libs.androidx.lifecycle.livedata.ktx)
+
 
 
 }
+
 
 
 
