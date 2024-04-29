@@ -19,9 +19,16 @@ fun DogBreedsApp() {
         DogListScreen(DogViewModel(DogRepository()))
     }
 }
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun DogBreeds1App() {
+//DogListScreen()
+//}
 
 @Preview(showBackground = true)
 @Composable
 fun DogBreeds1App() {
-DogListScreen()
+    val viewModel = DogViewModel(DogRepository()) // Create ViewModel instance
+    DogListScreen(viewModel) // Pass ViewModel instance to DogListScreen
 }

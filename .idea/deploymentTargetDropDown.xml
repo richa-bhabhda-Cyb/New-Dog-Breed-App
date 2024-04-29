@@ -51,12 +51,12 @@
               <deviceKey>
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\richabh\.android\avd\Pixel_6_API_33.avd" />
+                  <value value="C:\Users\richabh\.android\avd\DogsBreedApp.avd" />
                 </Key>
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-04-29T13:14:54.587799200Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-04-29T13:31:22.807018600Z" />
         </State>
       </entry>
     </value>
