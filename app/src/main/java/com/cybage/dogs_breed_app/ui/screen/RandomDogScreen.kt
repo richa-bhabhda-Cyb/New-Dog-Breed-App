@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.cybage.dogs_breed_app.viewmodel.RandomDogViewModel
@@ -56,10 +57,10 @@ fun RandomDogScreen(viewModel: RandomDogViewModel = viewModel(RandomDogViewModel
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun PreviewRandomDogScreen() {
+@Preview(showBackground = true)
+@Composable
+fun PreviewRandomDogScreen() {
 //    DogBreedsTheme {
 //        RandomDogScreen()
 //    }
-//}
+}
