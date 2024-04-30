@@ -1,4 +1,4 @@
-//package com.cybage.dogs_breed_app.ui.screen//package com.cybage.dogs_breed_app.ui.screen
+package com.cybage.dogs_breed_app.ui.screen//package com.cybage.dogs_breed_app.ui.screen
 //
 //// RandomDogScreen.kt
 //
@@ -6,13 +6,10 @@
 //import androidx.compose.foundation.layout.*
 //import androidx.compose.material.Button
 //import androidx.compose.material.Text
-//import androidx.compose.material3.Button
-//import androidx.compose.material3.Text
 //import androidx.compose.runtime.Composable
 //import androidx.compose.ui.Alignment
 //import androidx.compose.ui.Modifier
 //import androidx.compose.ui.res.painterResource
-//import androidx.compose.ui.tooling.preview.Preview
 //import androidx.compose.ui.unit.dp
 //import androidx.lifecycle.viewmodel.compose.viewModel
 //import com.cybage.dogs_breed_app.viewmodel.RandomDogViewModel
@@ -57,10 +54,10 @@
 //    }
 //}
 //
-//@Preview(showBackground = true)
-//@Composable
-//fun PreviewRandomDogScreen() {
+////@Preview(showBackground = true)
+////@Composable
+////fun PreviewRandomDogScreen() {
 ////    DogBreedsTheme {
 ////        RandomDogScreen()
 ////    }
-//}
+////}

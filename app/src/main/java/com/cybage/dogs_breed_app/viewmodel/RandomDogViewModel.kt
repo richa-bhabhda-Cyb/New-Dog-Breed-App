@@ -1,21 +1,16 @@
 package com.cybage.dogs_breed_app.viewmodel//package com.cybage.dogs_breed_app.viewmodel
-//
-//import androidx.lifecycle.LiveData
-//import androidx.lifecycle.MutableLiveData
-//import androidx.lifecycle.viewModelScope
-//import kotlinx.coroutines.launch
-//
-//class RandomDogViewModel {
-//
-////SecondScreen:
-//
-//    private val _randomDogImageUrl = MutableLiveData<String>()
-//    val randomDogImageUrl: LiveData<String> = _randomDogImageUrl
-//
-//    fun fetchRandomDogImage() {
-//        viewModelScope.launch {
-//            val imageUrl = repository.getRandomDogImage()
-//            _randomDogImageUrl.value = imageUrl
-//        }
-//    }
-//}
+
+import androidx.lifecycle.ViewModel
+import com.cybage.dogs_breed_app.repository.DogRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+
+class RandomDogViewModel(private val repository: DogRepository) : ViewModel() {
+
+    private val _randomDogImageUrl = MutableStateFlow<String?>(null)
+    val randomDogImageUrl = _randomDogImageUrl
+
+    suspend fun fetchRandomDogImage() {
+        val imageUrl = repository.getRandomDogImage()
+        _randomDogImageUrl.value = imageUrl
+    }
+}

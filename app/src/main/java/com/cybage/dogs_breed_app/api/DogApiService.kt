@@ -1,14 +1,12 @@
 package com.cybage.dogs_breed_app.api
 
 import com.cybage.dogs_breed_app.api.responses.DogBreedsResponse
+import com.cybage.dogs_breed_app.api.responses.RandomDogImageResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 interface DogApiService {
-
-
-
 
     companion object {
         private const val BASE_URL = "https://dog.ceo/api/"
@@ -27,8 +25,9 @@ interface DogApiService {
  @GET("breeds/list/all")
     suspend fun getAllDogBreeds() : DogBreedsResponse
 
-//    //2nd Screen:
-//    @GET("breeds/image/random")
-//    suspend fun getRandomDogImage(): RandomDogResponse
+    //2nd Screen:
+    @GET("breeds/image/random")
+
+    suspend fun getRandomDogImage(): RandomDogImageResponse
 
 }
