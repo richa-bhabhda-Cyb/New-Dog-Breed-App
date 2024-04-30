@@ -91,7 +91,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.cybage.dogs_breed_app.repository.DogRepository
 import com.cybage.dogs_breed_app.ui.extensionfunctionforlivedata.collectAsState
 import com.cybage.dogs_breed_app.viewmodel.DogViewModel
 
@@ -110,7 +110,9 @@ import com.cybage.dogs_breed_app.viewmodel.DogViewModel
 
 
 @Composable
-fun DogListScreen(viewModel: DogViewModel = viewModel()) {
+fun DogListScreen(viewModel: DogViewModel) {
+
+//fun DogListScreen(viewModel: DogViewModel = viewModel()) {
     val dogBreeds by viewModel.dogBreeds.collectAsState()
 
     LazyColumn {
@@ -142,10 +144,18 @@ fun DogBreedItem(breed: String) {
     }
 }
 
+//@Preview
+//@Composable
+//fun DogListScreenPreview() {
+//    DogListScreen()
+//}
+
+//30-04-24
 @Preview
 @Composable
 fun DogListScreenPreview() {
-    DogListScreen()
+    val viewModel = DogViewModel(DogRepository()) // Provide ViewModel instance
+    DogListScreen(viewModel)
 }
 
 @Preview

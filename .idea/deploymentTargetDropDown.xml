@@ -22,7 +22,20 @@
         </State>
       </entry>
       <entry key="DogBreeds1App">
-        <State />
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\richabh\.android\avd\DogsBreedApp.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-04-30T06:09:38.989475Z" />
+        </State>
       </entry>
       <entry key="DogBreedsApp">
         <State />

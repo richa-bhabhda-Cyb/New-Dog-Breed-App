@@ -22,8 +22,9 @@ interface DogApiService {
         }
     }
 
-    @GET("breeds/list/all")
 
+//@GET("v2/breeds")
+ @GET("breeds/list/all")
     suspend fun getAllDogBreeds() : DogBreedsResponse
 
 //    //2nd Screen:
