@@ -1,4 +1,4 @@
-package com.cybage.dogs_breed_app.viewmodel//package com.cybage.dogs_breed_app.viewmodel
+package com.cybage.dogs_breed_app.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.cybage.dogs_breed_app.repository.DogRepository

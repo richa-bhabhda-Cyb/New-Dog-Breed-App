@@ -1,6 +1,6 @@
 package com.cybage.dogs_breed_app.data.model
 
-data class RandonImage(
+data class RandomImage(
     val message: List<String>,
     val status: String
 )
