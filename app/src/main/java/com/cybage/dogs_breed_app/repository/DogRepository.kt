@@ -24,5 +24,24 @@ class DogRepository {
 //            dogApiService.getRandomDogImage().imageUrl
 //        }
 //    }
-}
+
+    //3rd Screen:
+
+        suspend fun getDogImagesByBreed(breed: String): List<String> {
+            return withContext(Dispatchers.IO) {
+                try {
+                    val response = dogApiService.getDogImagesByBreed(breed)
+                    if (response.status == "success") {
+                        response.message
+                    } else {
+                        throw Exception("Failed to fetch images for breed: $breed")
+                    }
+                } catch (e: Exception) {
+                    throw Exception("Failed to fetch images for breed: $breed", e)
+                }
+            }
+        }
+    }
+
+
 
