@@ -18,14 +18,19 @@ class DogRepository {
         }
     }
 
-    //2nd Screen
+   // 2nd Screen
 
 
-    suspend fun getRandomDogImage(): String {
-        return withContext(Dispatchers.IO) {
-            dogApiService.getRandomDogImage().imageUrl
-        }
-    }
+//    suspend fun getRandomDogImage(): String {
+//        return withContext(Dispatchers.IO) {
+//            dogApiService.getRandomDogImage().imageUrl
+//        }
+//    }
 
+
+
+    // 3rd Screen:
+
+    suspend fun get
 }
 
