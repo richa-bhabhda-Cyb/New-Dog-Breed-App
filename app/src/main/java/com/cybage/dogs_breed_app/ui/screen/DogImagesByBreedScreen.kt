@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -20,7 +22,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -31,6 +36,8 @@ import com.cybage.dogs_breed_app.viewmodel.DogImagesByBreedViewModel
 @Composable
 fun DogImagesByBreed(viewModel: DogImagesByBreedViewModel = viewModel()) {
     val breedState = remember { mutableStateOf("") }
+    val focusRequester = remember { FocusRequester() } // Remember the FocusRequester
+
 
     Column(
             modifier = Modifier
@@ -40,10 +47,14 @@ fun DogImagesByBreed(viewModel: DogImagesByBreedViewModel = viewModel()) {
             verticalArrangement = Arrangement.Center
     ) {
         TextField(
-                value = breedState.value,
-                onValueChange = { breedState.value = it },
-                label = { Text("Enter Dog Breed") },
-                modifier = Modifier.fillMaxWidth()
+                value = breedState.value ,
+                onValueChange = { breedState.value = it } ,
+                label = { Text("Enter Dog Breed") } ,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .focusRequester(focusRequester) , // Request focus for the TextField
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done) , // Set keyboard action to Done
+                keyboardActions = KeyboardActions(onDone = { focusRequester.freeFocus() }) // Release focus on Done
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -80,9 +91,6 @@ fun DogImageItem(imageUrl: String) {
     // Load image using Coil and rememberImagePainter
     val painter: Painter = rememberImagePainter(
             data = imageUrl,
-            builder = {
-                // Optionally, apply transformations here
-            }
     )
 
     // Display the loaded image
