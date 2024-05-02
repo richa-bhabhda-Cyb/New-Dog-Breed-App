@@ -2,6 +2,7 @@ package com.cybage.dogs_breed_app.api
 
 import com.cybage.dogs_breed_app.api.responses.DogBreedsResponse
 import com.cybage.dogs_breed_app.api.responses.DogImagesByBreedResponse
+import com.cybage.dogs_breed_app.api.responses.RandomDogImageResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -27,9 +28,9 @@ interface DogApiService {
     suspend fun getAllDogBreeds() : DogBreedsResponse
 
     //2nd Screen:
-//    @GET("breeds/image/random")
-//
-//    suspend fun getRandomDogImage(): RandomDogImageResponse
+    @GET("breeds/image/random")
+
+    suspend fun getRandomDogImage(): RandomDogImageResponse
 
     //3rd Screen
     @GET("breed/{breed}/images")

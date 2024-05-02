@@ -19,11 +19,15 @@ class DogRepository {
     }
 
 //    //2nd Screen
-//    suspend fun getRandomDogImage() {
-//        return withContext(Dispatchers.IO) {
-//            dogApiService.getRandomDogImage().imageUrl
-//        }
-//    }
+
+
+    suspend fun getRandomDogImage(): String {
+        return withContext(Dispatchers.IO) {
+            val response = dogApiService.getRandomDogImage()
+            response.imageUrl
+        }
+    }
+
 
     //3rd Screen:
 
