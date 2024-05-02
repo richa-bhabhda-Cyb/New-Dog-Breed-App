@@ -10,7 +10,7 @@ class DogRepository {
 
 
     //1st Screen:
-    suspend fun getAllDogBreeds(): List<String> {
+    suspend fun getAllDogBreeds() : List<String> {
         return withContext(Dispatchers.IO) {
             val response = dogApiService.getAllDogBreeds()
             val breedMap = response.message // This is a map of breed groups to lists of breeds
@@ -27,21 +27,23 @@ class DogRepository {
 
     //3rd Screen:
 
-        suspend fun getDogImagesByBreed(breed: String): List<String> {
-            return withContext(Dispatchers.IO) {
-                try {
-                    val response = dogApiService.getDogImagesByBreed(breed)
-                    if (response.status == "success") {
-                        response.message
-                    } else {
-                        throw Exception("Failed to fetch images for breed: $breed")
-                    }
-                } catch (e: Exception) {
-                    throw Exception("Failed to fetch images for breed: $breed", e)
-                }
+    suspend fun getDogImagesByBreed(breed : String) : List<String> {
+        return withContext(Dispatchers.IO) {
+            // Call your API service method to fetch dog images by breed
+            val response = dogApiService.getDogImagesByBreed(breed)
+            // Check if the response status is successful
+            if(response.status == "success") {
+                // Return the list of image URLs from the response
+                response.message
+            } else {
+                // Handle error case
+                throw IllegalStateException("Failed to fetch dog images for breed: $breed")
             }
         }
     }
+}
+
+
 
 
 
