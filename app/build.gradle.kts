@@ -77,7 +77,7 @@ dependencies {
         implementation (libs.androidx.lifecycle.livedata.ktx)
 
 
-    //Mokito
+    //Mockito
 
 //        testImplementation (libs.mockito.mockito.core)
 //        testImplementation (libs.mockito.inline)

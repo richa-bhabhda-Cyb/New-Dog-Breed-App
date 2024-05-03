@@ -22,10 +22,7 @@ class DogRepository {
 
 
     suspend fun getRandomDogImage(): String {
-        return withContext(Dispatchers.IO) {
-            val response = dogApiService.getRandomDogImage()
-            response.imageUrl
-        }
+        return dogApiService.getRandomDogImage().message
     }
 
 

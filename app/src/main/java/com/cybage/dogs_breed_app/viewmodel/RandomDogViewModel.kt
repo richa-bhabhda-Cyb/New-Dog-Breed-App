@@ -9,7 +9,7 @@ class RandomDogViewModel(private val repository: DogRepository) : ViewModel() {
     private val _randomDogImageUrl = MutableStateFlow<String?>(null)
     val randomDogImageUrl = _randomDogImageUrl
 
-    suspend fun fetchRandomDogImage(imageUrl : String?) {
+    suspend fun fetchRandomDogImage() {
         val imageUrl = repository.getRandomDogImage()
         _randomDogImageUrl.value = imageUrl
     }

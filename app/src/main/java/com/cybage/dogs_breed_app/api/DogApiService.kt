@@ -23,7 +23,7 @@ interface DogApiService {
     }
 
 
-//@GET("v2/breeds")
+//1st Screen
  @GET("breeds/list/all")
     suspend fun getAllDogBreeds() : DogBreedsResponse
 
@@ -33,8 +33,8 @@ interface DogApiService {
     suspend fun getRandomDogImage(): RandomDogImageResponse
 
     //3rd Screen
-    @GET("breed/{breed}/images")
-    suspend fun getDogImagesByBreed(@Path("breed") breed: String): DogImagesByBreedResponse
+    @GET("breed/{hound}/images")
+    suspend fun getDogImagesByBreed(@Path("hound") breed: String): DogImagesByBreedResponse
 
 
 

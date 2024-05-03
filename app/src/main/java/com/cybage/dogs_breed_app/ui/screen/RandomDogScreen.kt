@@ -1,5 +1,6 @@
 package com.cybage.dogs_breed_app.ui.screen
 
+// RandomDogScreen.kt
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,7 +12,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -21,14 +24,16 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.cybage.dogs_breed_app.R
+import com.cybage.dogs_breed_app.repository.DogRepository
 import com.cybage.dogs_breed_app.viewmodel.RandomDogViewModel
-
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
 fun RandomDogScreen(viewModel: RandomDogViewModel = viewModel(RandomDogViewModel::class.java)) {
-    val imageUrlState =
-            viewModel.randomDogImageUrl.collectAsState() // Observe changes to the StateFlow
+    val imageUrlState = viewModel.randomDogImageUrl.collectAsState()
+
+    val coroutineScope = rememberCoroutineScope()
 
     Column(
             modifier = Modifier
@@ -37,7 +42,7 @@ fun RandomDogScreen(viewModel: RandomDogViewModel = viewModel(RandomDogViewModel
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
     ) {
-        val imageUrl = imageUrlState.value // Access the value from the collected state
+        val imageUrl = imageUrlState.value
 
         if (imageUrl != null) {
             Image(
@@ -48,10 +53,9 @@ fun RandomDogScreen(viewModel: RandomDogViewModel = viewModel(RandomDogViewModel
                         .weight(1f)
             )
         } else {
-            // If imageUrl is null, show a placeholder image or text
             Image(
-                    painter = painterResource(id = R.drawable.lucy) , // Placeholder image
-                    contentDescription = "Placeholder" ,
+                    painter = painterResource(id = R.drawable.lucy),
+                    contentDescription = "Placeholder",
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)
@@ -60,18 +64,29 @@ fun RandomDogScreen(viewModel: RandomDogViewModel = viewModel(RandomDogViewModel
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = {
-                    viewModelScope.launch {
+        // Use LaunchedEffect to launch a coroutine when the composable is first displayed
+        LaunchedEffect(true) {
+            coroutineScope.launch {
+                viewModel.fetchRandomDogImage()
+            }
+        }
+
+        Button(
+                onClick = {
+                    coroutineScope.launch {
                         viewModel.fetchRandomDogImage()
                     }
-                }, modifier = Modifier.fillMaxWidth()) {
+                },
+                modifier = Modifier.fillMaxWidth()
+        ) {
             Text(text = "Show Random")
         }
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
 fun PreviewRandomDogScreen() {
-    RandomDogScreen()
+    RandomDogScreen(RandomDogViewModel(DogRepository()))
 }
