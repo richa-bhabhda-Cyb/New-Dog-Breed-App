@@ -4,21 +4,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.cybage.dogs_breed_app.repository.DogRepository
-import com.cybage.dogs_breed_app.ui.screen.RandomDogScreen
-import com.cybage.dogs_breed_app.viewmodel.RandomDogViewModel
+import com.cybage.dogs_breed_app.ui.screen.DogImagesByBreed
+import com.cybage.dogs_breed_app.viewmodel.DogImagesByBreedViewModel
 
 
 //30-04-24
 @Composable
 fun DogBreedsApp() {
     Surface(color = MaterialTheme.colorScheme.background) {
-//     1   val viewModel = DogViewModel(DogRepository())
+//        val viewModel = DogViewModel(DogRepository())
 //        DogListScreen(viewModel)
 
-//       2 DogImagesByBreed()
-
-        RandomDogScreen(viewModel = RandomDogViewModel(DogRepository()))
+        DogImagesByBreed(DogImagesByBreedViewModel())
     }
 }
 
@@ -28,7 +25,6 @@ fun DogBreeds1App() {
 //    val viewModel = DogViewModel(DogRepository()) // Create ViewModel instance with DogRepository
 //    DogListScreen(viewModel) // Pass ViewModel instance to DogListScreen
 
-//    DogImagesByBreed()
-
-    RandomDogScreen(viewModel = RandomDogViewModel(DogRepository()))
+    DogImagesByBreed(DogImagesByBreedViewModel())
 }
+
