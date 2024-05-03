@@ -2,25 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="DogBreedApp (1)">
-        <State />
-      </entry>
-      <entry key="DogBreedItemPreview">
-        <State>
-          <targetSelectedWithDropDown>
-            <Target>
-              <type value="QUICK_BOOT_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\richabh\.android\avd\DogsBreedApp.avd" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-04-29T05:15:04.806879200Z" />
-        </State>
-      </entry>
       <entry key="DogBreeds1App">
         <State>
           <targetSelectedWithDropDown>
@@ -36,9 +17,6 @@
           </targetSelectedWithDropDown>
           <timeTargetWasSelectedWithDropDown value="2024-04-30T06:09:38.989475Z" />
         </State>
-      </entry>
-      <entry key="DogBreedsApp">
-        <State />
       </entry>
       <entry key="DogListScreenPreview">
         <State>
@@ -56,6 +34,9 @@
           <timeTargetWasSelectedWithDropDown value="2024-04-29T04:40:00.809941400Z" />
         </State>
       </entry>
+      <entry key="PreviewRandomDogScreen">
+        <State />
+      </entry>
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>
@@ -64,12 +45,12 @@
               <deviceKey>
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\richabh\.android\avd\DogsBreedApp.avd" />
+                  <value value="C:\Users\richabh\.android\avd\Pixel_6_API_33_2.avd" />
                 </Key>
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-04-29T13:31:22.807018600Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-05-03T12:08:44.242049700Z" />
         </State>
       </entry>
     </value>

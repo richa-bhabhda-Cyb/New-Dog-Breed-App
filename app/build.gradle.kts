@@ -60,8 +60,8 @@ dependencies {
     implementation (libs.ui.tooling)
     implementation (libs.material3)
     implementation(libs.androidx.navigation.compose)
-    testImplementation(libs.testng)
-    testImplementation(libs.testng)
+//    testImplementation(libs.testng)
+//    testImplementation(libs.testng)
     androidTestImplementation (libs.androidx.junit.v113)
     androidTestImplementation (libs.androidx.espresso.core.v340)
     androidTestImplementation (libs.ui.test.junit4)
@@ -77,18 +77,29 @@ dependencies {
         implementation (libs.androidx.lifecycle.livedata.ktx)
 
 
-    //Mokito
+    //Mockito
 
-        testImplementation (libs.mockito.mockito.core)
-        testImplementation (libs.mockito.inline)
-        testImplementation (libs.mockito.mockito.core)
+//        testImplementation (libs.mockito.mockito.core)
+//        testImplementation (libs.mockito.inline)
+//        testImplementation (libs.mockito.mockito.core)
+//
+//    testImplementation (libs.mockito.mockito.core)
+//
+//    testImplementation(libs.kotlinx.coroutines.test)
 
-    testImplementation (libs.mockito.mockito.core)
+//
+implementation(libs.accompanist.coil)
 
-    testImplementation(libs.kotlinx.coroutines.test)
+    implementation (libs.coil)
 
 
+    //Coroutines:
+    implementation (libs.kotlinx.coroutines.core)
+    implementation (libs.kotlinx.coroutines.android)
 
+//
+    implementation (libs.androidx.runtime.livedata)
+    implementation (libs.androidx.lifecycle.viewmodel.compose)
 
 
 }
