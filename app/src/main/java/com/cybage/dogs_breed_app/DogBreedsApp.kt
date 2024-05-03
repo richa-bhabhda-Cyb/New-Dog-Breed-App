@@ -45,7 +45,7 @@ fun DogBreedsApp(navController: NavController) {
         ) {
             Text(
                     text = "Who Let the Dogs Out?",
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(bottom = 16.dp)
             )
             CardItem("Dog Breed List", painterResource(R.drawable.may)) {
@@ -84,7 +84,7 @@ fun CardItem(title: String , image: Painter , onClick: () -> Unit) {
                     painter = image,
                     contentDescription = null,
                     modifier = Modifier
-                        .size(500.dp)
+                        .size(120.dp)
                         .align(Alignment.CenterHorizontally)
             )
             Spacer(modifier = Modifier.height(16.dp))
