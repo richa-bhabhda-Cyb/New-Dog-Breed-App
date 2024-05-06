@@ -1,6 +1,7 @@
 package com.cybage.dogs_breed_app.ui.screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,19 +17,25 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.cybage.dogs_breed_app.repository.DogRepository
+import androidx.navigation.NavController
+import com.cybage.dogs_breed_app.NavigationBar
 import com.cybage.dogs_breed_app.ui.extensionfunctionforlivedata.collectAsState
 import com.cybage.dogs_breed_app.viewmodel.DogViewModel
 
 
 @Composable
-fun DogListScreen(viewModel: DogViewModel) {
+fun DogListScreen(viewModel : DogViewModel, navController : NavController) {
 
     val dogBreeds by viewModel.dogBreeds.collectAsState()
+    Column ( modifier = Modifier
+        .fillMaxSize())
+    {
+        NavigationBar(navController = navController , title = "Breedoze")
 
-    LazyColumn {
-        items(dogBreeds) { breed ->
-            DogBreedItem(breed = breed)
+        LazyColumn {
+            items(dogBreeds) { breed ->
+                DogBreedItem(breed = breed)
+            }
         }
     }
 }
@@ -56,12 +63,12 @@ fun DogBreedItem(breed: String) {
 }
 
 
-@Preview
-@Composable
-fun DogListScreenPreview() {
-    val viewModel = DogViewModel(DogRepository()) // Provide ViewModel instance
-    DogListScreen(viewModel)
-}
+//@Preview
+//@Composable
+//fun DogListScreenPreview() {
+//    val viewModel = DogViewModel(DogRepository()) // Provide ViewModel instance
+//    DogListScreen(viewModel)
+//}
 
 @Preview
 @Composable
