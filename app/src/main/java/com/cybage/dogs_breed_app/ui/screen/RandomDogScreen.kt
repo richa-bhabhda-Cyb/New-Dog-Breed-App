@@ -18,23 +18,26 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import com.cybage.dogs_breed_app.NavigationBar
 import com.cybage.dogs_breed_app.R
-import com.cybage.dogs_breed_app.repository.DogRepository
 import com.cybage.dogs_breed_app.viewmodel.RandomDogViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun RandomDogScreen(viewModel: RandomDogViewModel = viewModel(RandomDogViewModel::class.java)) {
+fun RandomDogScreen(viewModel: RandomDogViewModel = viewModel(RandomDogViewModel::class.java),navController : NavController) {
     val imageUrlState = viewModel.randomDogImageUrl.collectAsState()
 
     val coroutineScope = rememberCoroutineScope()
-
+    Column ( modifier = Modifier
+        .fillMaxSize())
+    {
+        NavigationBar(navController = navController , title = "Breedoze",showBackButton= true)
     Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -82,11 +85,11 @@ fun RandomDogScreen(viewModel: RandomDogViewModel = viewModel(RandomDogViewModel
             Text(text = "Show Random")
         }
     }
-}
+}}
 
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewRandomDogScreen() {
-    RandomDogScreen(RandomDogViewModel(DogRepository()))
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewRandomDogScreen() {
+//    RandomDogScreen(RandomDogViewModel(DogRepository()))
+//}
