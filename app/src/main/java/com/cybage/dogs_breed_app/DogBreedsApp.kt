@@ -212,9 +212,8 @@ import com.cybage.dogs_breed_app.viewmodel.DogImagesByBreedViewModel
 import com.cybage.dogs_breed_app.viewmodel.DogViewModel
 import com.cybage.dogs_breed_app.viewmodel.RandomDogViewModel
 
-
 @Composable
-fun DogBreedsApp(navController: NavController, title: String = "Breedoze",showBackButton : Boolean=false) {
+fun DogBreedsApp(navController: NavController, title: String = "Breedoze", showBackButton: Boolean = false) {
     Surface(
             color = MaterialTheme.colorScheme.background,
             modifier = Modifier.fillMaxSize()
@@ -223,7 +222,7 @@ fun DogBreedsApp(navController: NavController, title: String = "Breedoze",showBa
                 modifier = Modifier.fillMaxSize()
         ) {
             // Use the NavigationBar composable instead of TopAppBar
-            NavigationBar(navController = navController, title = title,showBackButton= false)
+            NavigationBar(navController = navController, title = title, showBackButton = showBackButton)
 
             Box(
                     modifier = Modifier
@@ -267,11 +266,9 @@ fun DogBreedsApp(navController: NavController, title: String = "Breedoze",showBa
     }
 }
 
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavigationBar(navController: NavController, title: String, showBackButton: Boolean=false ) {
+fun NavigationBar(navController: NavController, title: String, showBackButton: Boolean = false) {
     TopAppBar(
             title = {
                 Row(
@@ -291,23 +288,20 @@ fun NavigationBar(navController: NavController, title: String, showBackButton: B
                 }
             },
             colors = TopAppBarDefaults.topAppBarColors(Color(0xFF8163B8)),
-            actions = {
-                IconButton(onClick = { navController.popBackStack() }) {
-                    Icon(
-                            painter = painterResource(id = R.drawable.arrawback),
-                            contentDescription = "Back",
-                            tint = Color.White,
-                            modifier = Modifier.size(22.dp) // Adjust the size here
-
-
-                    )
+            navigationIcon = {
+                if (showBackButton) {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                                painter = painterResource(id = R.drawable.arrawback),
+                                contentDescription = "Back",
+                                tint = Color.White,
+                                modifier = Modifier.size(22.dp) // Adjust the size here
+                        )
+                    }
                 }
             }
     )
 }
-
-
-
 
 @Composable
 fun CardItem(title: String, image: Painter, onClick: () -> Unit) {
@@ -321,10 +315,7 @@ fun CardItem(title: String, image: Painter, onClick: () -> Unit) {
     ) {
         Column(
                 modifier = Modifier.padding(16.dp)
-                    .fillMaxWidth() ,
-
-
-
+                    .fillMaxWidth(),
         ) {
             Image(
                     painter = image,
@@ -346,25 +337,36 @@ fun CardItem(title: String, image: Painter, onClick: () -> Unit) {
     }
 }
 
-
-
-
+//@Composable
+//fun DogListScreen(navController: NavController) {
+//    // Your Dog List screen content here
+//}
+//
+//@Composable
+//fun RandomDogScreen(navController: NavController) {
+//    // Your Random Dog screen content here
+//}
+//
+//@Composable
+//fun DogImagesByBreedScreen(navController: NavController) {
+//    // Your Dog Images By Breed screen content here
+//}
 
 @Composable
 fun MainNavigation() {
     val navController = rememberNavController()
     NavHost(navController, startDestination = "DogBreedsApp") {
         composable("DogBreedsApp") {
-            DogBreedsApp(navController, showBackButton=false)
+            DogBreedsApp(navController)
         }
         composable("DogListScreen") {
-            DogListScreen(DogViewModel(DogRepository()),navController)
+            DogListScreen(DogViewModel(repository = DogRepository()) ,navController)
         }
         composable("RandomDogImageScreen") {
-            RandomDogScreen(RandomDogViewModel(DogRepository()),navController)
+            RandomDogScreen(RandomDogViewModel(DogRepository()) , navController)
         }
         composable("DogImageByBreedScreen") {
-            DogImagesByBreed(DogImagesByBreedViewModel(),navController)
+            DogImagesByBreed(DogImagesByBreedViewModel(), navController)
         }
     }
 }
@@ -372,5 +374,6 @@ fun MainNavigation() {
 @Preview
 @Composable
 fun DogBreedsAppPreview() {
-    DogBreedsApp(rememberNavController(),showBackButton= false)
+    DogBreedsApp(rememberNavController())
 }
+
