@@ -193,6 +193,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
@@ -213,7 +214,7 @@ import com.cybage.dogs_breed_app.viewmodel.RandomDogViewModel
 
 
 @Composable
-fun DogBreedsApp(navController: NavController, title: String = "Breedoze") {
+fun DogBreedsApp(navController: NavController, title: String = "Breedoze",showBackButton : Boolean=false) {
     Surface(
             color = MaterialTheme.colorScheme.background,
             modifier = Modifier.fillMaxSize()
@@ -222,7 +223,7 @@ fun DogBreedsApp(navController: NavController, title: String = "Breedoze") {
                 modifier = Modifier.fillMaxSize()
         ) {
             // Use the NavigationBar composable instead of TopAppBar
-            NavigationBar(navController = navController, title = title)
+            NavigationBar(navController = navController, title = title,showBackButton= false)
 
             Box(
                     modifier = Modifier
@@ -270,7 +271,7 @@ fun DogBreedsApp(navController: NavController, title: String = "Breedoze") {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavigationBar(navController: NavController, title: String) {
+fun NavigationBar(navController: NavController, title: String, showBackButton: Boolean=false ) {
     TopAppBar(
             title = {
                 Row(
@@ -320,6 +321,10 @@ fun CardItem(title: String, image: Painter, onClick: () -> Unit) {
     ) {
         Column(
                 modifier = Modifier.padding(16.dp)
+                    .fillMaxWidth() ,
+
+
+
         ) {
             Image(
                     painter = image,
@@ -327,7 +332,8 @@ fun CardItem(title: String, image: Painter, onClick: () -> Unit) {
                     modifier = Modifier
                         .fillMaxWidth()  // Image takes up full width of the card
                         .height(120.dp)  // Fixed height for the image
-                        .align(Alignment.CenterHorizontally)
+                        .align(Alignment.CenterHorizontally),
+                    contentScale = ContentScale.FillWidth
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
@@ -349,7 +355,7 @@ fun MainNavigation() {
     val navController = rememberNavController()
     NavHost(navController, startDestination = "DogBreedsApp") {
         composable("DogBreedsApp") {
-            DogBreedsApp(navController)
+            DogBreedsApp(navController, showBackButton=false)
         }
         composable("DogListScreen") {
             DogListScreen(DogViewModel(DogRepository()),navController)
@@ -366,5 +372,5 @@ fun MainNavigation() {
 @Preview
 @Composable
 fun DogBreedsAppPreview() {
-    DogBreedsApp(rememberNavController())
+    DogBreedsApp(rememberNavController(),showBackButton= false)
 }

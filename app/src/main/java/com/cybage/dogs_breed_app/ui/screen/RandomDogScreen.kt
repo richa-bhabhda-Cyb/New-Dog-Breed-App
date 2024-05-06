@@ -37,7 +37,7 @@ fun RandomDogScreen(viewModel: RandomDogViewModel = viewModel(RandomDogViewModel
     Column ( modifier = Modifier
         .fillMaxSize())
     {
-        NavigationBar(navController = navController , title = "Breedoze")
+        NavigationBar(navController = navController , title = "Breedoze",showBackButton= true)
     Column(
             modifier = Modifier
                 .fillMaxSize()

@@ -30,7 +30,7 @@ fun DogListScreen(viewModel : DogViewModel, navController : NavController) {
     Column ( modifier = Modifier
         .fillMaxSize())
     {
-        NavigationBar(navController = navController , title = "Breedoze")
+        NavigationBar(navController = navController , title = "Breedoze",showBackButton= true)
 
         LazyColumn {
             items(dogBreeds) { breed ->

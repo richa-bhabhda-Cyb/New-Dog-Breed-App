@@ -45,7 +45,7 @@ fun DogImagesByBreed(viewModel: DogImagesByBreedViewModel = viewModel(),navContr
     Column ( modifier = Modifier
         .fillMaxSize()){
 
-        NavigationBar(navController = navController , title = "Breedoze")
+        NavigationBar(navController = navController , title = "Breedoze", showBackButton= true)
 
         Column(
                 modifier = Modifier
