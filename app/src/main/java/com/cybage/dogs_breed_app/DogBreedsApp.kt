@@ -194,6 +194,30 @@ fun MainNavigation() {
     }
 }
 
+
+@Composable
+fun OfflineScreen() {
+    Surface(
+            color = MaterialTheme.colorScheme.background,
+            modifier = Modifier.fillMaxSize()
+    ) {
+        Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                    text = "No Internet Connection",
+                    style = MaterialTheme.typography.bodyLarge
+            )
+            Text(
+                    text = "Please check your internet connection and try again.",
+                    style = MaterialTheme.typography.bodyMedium
+            )
+        }
+    }
+}
+
 @Preview
 @Composable
 fun DogBreedsAppPreview() {
