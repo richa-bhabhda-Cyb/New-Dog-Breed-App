@@ -151,18 +151,18 @@ fun DogImagesByBreed(viewModel: DogImagesByBreedViewModel = viewModel(), navCont
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            val isLoading = viewModel.isLoading.value
+            val isLoading = viewModel.isLoading.value ?: false
             val breedImages = viewModel.breedImages.value
-            val isError = viewModel.error.value?.isNotBlank()
+            val isError = viewModel.error.value?.isNotBlank()?:false
 
             Button(
                     onClick = {
                         viewModel.fetchBreedImages(breedState.value)
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    enabled = ! isLoading !!
+                    enabled = isLoading !!
             ) {
-                if (isLoading == true) {
+                if (isLoading) {
                     CircularProgressIndicator(
                             modifier = Modifier.size(24.dp),
                             color = LocalContentColor.current
@@ -172,7 +172,7 @@ fun DogImagesByBreed(viewModel: DogImagesByBreedViewModel = viewModel(), navCont
                 }
             }
 
-            if (isError == true) {
+            if (isError) {
                 Text(
                         text = "Error: ${viewModel.error.value}",
                         color = Color.Red,
@@ -180,9 +180,10 @@ fun DogImagesByBreed(viewModel: DogImagesByBreedViewModel = viewModel(), navCont
                 )
             }
 
-            if (!isLoading && breedImages.isNullOrEmpty() && ! isError !!) {
+            if (!isLoading && breedImages.isNullOrEmpty() && !isError) {
                 Text(text = "No images found.")
-            } else {
+            }
+            else {
                 LazyVerticalGrid(
                         columns = GridCells.Fixed(3),
                         modifier = Modifier.fillMaxWidth()
