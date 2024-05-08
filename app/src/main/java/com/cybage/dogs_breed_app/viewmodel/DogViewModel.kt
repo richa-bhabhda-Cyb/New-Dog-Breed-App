@@ -79,7 +79,7 @@ class DogViewModel(private val repository: DogRepository) : ViewModel() {
     val error: LiveData<String> = _error
 
     // Function to fetch dog breeds
-    fun startFetchingDogBreeds() {
+    private fun startFetchingDogBreeds() {
         viewModelScope.launch {
             try {
                 val breeds = repository.getAllDogBreeds()
@@ -91,7 +91,12 @@ class DogViewModel(private val repository: DogRepository) : ViewModel() {
             }
         }
     }
+
+    fun fetchedList(){
+        startFetchingDogBreeds()
+    }
 }
+
 
 
 

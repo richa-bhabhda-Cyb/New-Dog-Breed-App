@@ -2,22 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="DogListScreenPreview">
-        <State>
-          <targetSelectedWithDropDown>
-            <Target>
-              <type value="QUICK_BOOT_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\richabh\.android\avd\DogsBreedApp.avd" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-04-29T04:40:00.809941400Z" />
-        </State>
-      </entry>
       <entry key="PreviewBreedImagesScreen">
         <State />
       </entry>
@@ -37,7 +21,7 @@
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-05-07T12:00:50.797643100Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-05-08T08:27:22.057514Z" />
         </State>
       </entry>
     </value>

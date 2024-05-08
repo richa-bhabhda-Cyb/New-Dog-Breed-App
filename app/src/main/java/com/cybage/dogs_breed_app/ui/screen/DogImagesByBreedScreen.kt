@@ -160,9 +160,9 @@ fun DogImagesByBreed(viewModel: DogImagesByBreedViewModel = viewModel(), navCont
                         viewModel.fetchBreedImages(breedState.value)
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    enabled = isLoading !!
+                    enabled = breedState.value.isNotBlank() // Enable the button when the text field is not blank
             ) {
-                if (isLoading) {
+                 if (isLoading) {
                     CircularProgressIndicator(
                             modifier = Modifier.size(24.dp),
                             color = LocalContentColor.current
@@ -171,6 +171,7 @@ fun DogImagesByBreed(viewModel: DogImagesByBreedViewModel = viewModel(), navCont
                     Text(text = "Show Images")
                 }
             }
+
 
             if (isError) {
                 Text(
@@ -205,7 +206,6 @@ fun DogImageItem(imageUrl: String) {
     val painter = rememberImagePainter(
             data = imageUrl,
     )
-
     // Display the loaded image
     Image(
             painter = painter,
