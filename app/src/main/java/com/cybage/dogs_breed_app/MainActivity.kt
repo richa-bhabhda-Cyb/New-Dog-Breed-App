@@ -19,9 +19,7 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             var isInternetAvailable by remember { mutableStateOf(true) } // Initialize with internet connectivity status
 
-            // Check internet connectivity and update isInternetAvailable accordingly
-            // Example:
-            // isInternetAvailable = checkInternetConnectivity()
+
             MainNavigation(navController = navController, isInternetAvailable = isInternetAvailable)
         }
     }
