@@ -60,6 +60,8 @@ dependencies {
     implementation (libs.ui.tooling)
     implementation (libs.material3)
     implementation(libs.androidx.navigation.compose)
+    testImplementation(libs.testng)
+    testImplementation(libs.testng)
 //    testImplementation(libs.testng)
 //    testImplementation(libs.testng)
     androidTestImplementation (libs.androidx.junit.v113)
@@ -86,6 +88,7 @@ dependencies {
 //    testImplementation (libs.mockito.mockito.core)
 //
 //    testImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation ("androidx.arch.core:core-testing:$version")
 
 //
 implementation(libs.accompanist.coil)
