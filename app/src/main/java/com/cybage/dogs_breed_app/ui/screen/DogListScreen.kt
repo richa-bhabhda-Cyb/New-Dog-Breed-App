@@ -241,17 +241,18 @@ fun DogListScreen(viewModel: DogViewModel, navController: NavController) {
         OfflineScreen()
     } else {
         val dogBreeds by viewModel.dogBreeds.collectAsState()
-        val isLoading = true
+        val isLoading =
+                dogBreeds.isEmpty() // Check if dogBreeds is null or empty to determine loading state
 
         Column(modifier = Modifier.fillMaxSize()) {
             NavigationBar(navController = navController, title = "Breedoze", showBackButton = true)
 
-            if (!isLoading) {
+            if (isLoading) {
                 LinearProgressIndicator()
-            }
-           else{
+            } else {
+                val breeds = dogBreeds
                 LazyColumn {
-                    items(dogBreeds) { breed ->
+                    items(breeds) { breed ->
                         DogBreedItem(breed = breed)
                     }
                 }
@@ -265,6 +266,7 @@ fun DogListScreen(viewModel: DogViewModel, navController: NavController) {
         }
     }
 }
+
 
 @Composable
 fun DogBreedItem(breed: String) {

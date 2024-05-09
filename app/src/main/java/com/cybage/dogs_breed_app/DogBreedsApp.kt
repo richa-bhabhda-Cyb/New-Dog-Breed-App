@@ -182,6 +182,7 @@ fun MainNavigation(navController: NavController, isInternetAvailable: Boolean) {
 
 
     val navController = rememberNavController()
+
     NavHost(navController, startDestination = "DogBreedsApp") {
         composable("DogBreedsApp") {
             DogBreedsApp(navController)
