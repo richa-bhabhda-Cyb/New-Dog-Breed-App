@@ -17,19 +17,11 @@ import org.mockito.Mockito.mock
 package com.cybage.dogs_breed_app
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.cybage.dogs_breed_app.viewmodel.DogViewModel
-import com.cybage.dogs_breed_app.repository.DogRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flowOf
+
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Assert.assertEquals
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+
+
 
 @ExperimentalCoroutinesApi
 class DogViewModelTest {
@@ -39,7 +31,7 @@ class DogViewModelTest {
 
     // This rule swaps the background executor used by the Architecture Components with a different one which executes each task synchronously
     @get: Rule
-    var instantExecutorRule = InstantTaskExecutorRule()
+    val instantExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var dogViewModel: DogViewModel
     private lateinit var mockRepository: DogRepository

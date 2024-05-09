@@ -88,7 +88,11 @@ dependencies {
 //    testImplementation (libs.mockito.mockito.core)
 //
 //    testImplementation(libs.kotlinx.coroutines.test)
-    androidTestImplementation ("androidx.arch.core:core-testing:$version")
+    androidTestImplementation (libs.androidx.core.testing)
+
+    testImplementation(libs.mockito.kotlin)
+
+    androidTestImplementation (libs.kotlinx.coroutines.test)
 
 //
 implementation(libs.accompanist.coil)

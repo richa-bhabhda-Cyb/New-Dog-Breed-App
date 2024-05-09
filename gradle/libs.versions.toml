@@ -9,6 +9,7 @@ coil = "1.4.0"
 converterGson = "2.9.0"
 
 
+coreTesting = "2.2.0"
 espressoCoreVersion = "3.5.1"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
@@ -16,10 +17,12 @@ coreKtx = "1.13.1"
 
 kotlinxCoroutinesAndroid = "1.6.0"
 kotlinxCoroutinesCore = "1.6.0"
+kotlinxCoroutinesTest = "2.7.9"
 lifecycleRuntimeKtx = "2.7.0"
 
 
 material3 = "1.2.1"
+mockitoKotlin = "3.2.0"
 navigationCompose = "2.7.7"
 retrofit = "2.9.0"
 runtimeLivedata = "1.6.7"
@@ -38,6 +41,7 @@ androidx-activity-compose-v140 = { module = "androidx.activity:activity-compose"
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 
 
+androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
 androidx-espresso-core-v340 = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCoreVersion" }
 androidx-junit-v113 = { module = "androidx.test.ext:junit", version.ref = "androidxJunitVersion" }
 androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleRuntimeKtx" }
@@ -55,7 +59,9 @@ androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecyc
 
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 testng = { module = "org.testng:testng", version.ref = "testng" }
 ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
