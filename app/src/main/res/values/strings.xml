@@ -1,3 +1,42 @@
 <resources>
     <string name="app_name">Dogs-Breed-App</string>
+    <string name="app_title">Breedoze</string>
+
+    <!--    DogBreedsApp-->
+
+
+        <string name="who_let_the_dogs_out">Who Let the Dogs Out?</string>
+        <string name="dog_breed_list">Dog Breed List</string>
+        <string name="random_dog_image">Random Dog Image</string>
+        <string name="dog_image_by_breed">Dog Image By Breed</string>
+        <string name="who_who_who">Who? Who? Who? Who?</string>
+        <string name="no_internet_connection">No Internet Connection</string>
+        <string name="check_internet_connection">Please check your internet connection and try again.</string>
+        <string name="logo_description">Logo</string>
+        <string name="back_button_description">Back</string>
+
+
+    <!-- Random Screen    -->
+        <string name="placeholder">Placeholder</string>
+        <string name="show_random">Show Random</string>
+
+    <!--  DogImagesByBreedScreen  -->
+
+
+        <string name="enter_dog_breed">Enter Dog Breed</string>
+        <string name="show_images">Show Images</string>
+        <string name="no_images_found">No images found.</string>
+        <string name="error_message">Error: </string>
+
+
+    <!--    ViewModels-->
+        <!--1st Screen :-->
+
+          <string name="fetch_dog_breeds_error">Failed to fetch dog breeds: %1$s</string>
+
+        <!--2nd Screen    -->
+
+        <string name="fetch_dog_images_error">Failed to fetch dog images for breed: %1$s</string>
+
+
 </resources>

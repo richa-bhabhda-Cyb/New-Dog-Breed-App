@@ -1,74 +1,4 @@
-package com.cybage.dogs_breed_app.ui.screen
-
-// RandomDogScreen.kt
-
-//@OptIn(ExperimentalCoilApi::class)
-//@Composable
-//fun RandomDogScreen(viewModel: RandomDogViewModel = viewModel(RandomDogViewModel::class.java),navController : NavController) {
-//    val imageUrlState = viewModel.randomDogImageUrl.collectAsState()
-//
-//    val coroutineScope = rememberCoroutineScope()
-//    Column ( modifier = Modifier
-//        .fillMaxSize())
-//    {
-//        NavigationBar(navController = navController , title = "Breedoze",showBackButton= true)
-//    Column(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(16.dp),
-//            horizontalAlignment = Alignment.CenterHorizontally,
-//            verticalArrangement = Arrangement.Center
-//    ) {
-//        val imageUrl = imageUrlState.value
-//
-//        if (imageUrl != null) {
-//            Image(
-//                    painter = rememberImagePainter(data = imageUrl),
-//                    contentDescription = "Random Dog Image",
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .weight(1f)
-//            )
-//        } else {
-//            Image(
-//                    painter = painterResource(id = R.drawable.lucy),
-//                    contentDescription = "Placeholder",
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .weight(1f)
-//            )
-//        }
-//
-//        Spacer(modifier = Modifier.height(16.dp))
-//
-//        // Use LaunchedEffect to launch a coroutine when the composable is first displayed
-//        LaunchedEffect(true) {
-//            coroutineScope.launch {
-//                viewModel.fetchRandomDogImage()
-//            }
-//        }
-//
-//        Button(
-//                onClick = {
-//                    coroutineScope.launch {
-//                        viewModel.fetchRandomDogImage()
-//                    }
-//                },
-//                modifier = Modifier.fillMaxWidth()
-//        ) {
-//            Text(text = "Show Random")
-//        }
-//    }
-//}}
-
-
-//@Preview(showBackground = true)
-//@Composable
-//fun PreviewRandomDogScreen() {
-//    RandomDogScreen(RandomDogViewModel(DogRepository()))
-//}
-
-
+package com.cybage.dogs_breed_app.ui.screen.randomimage
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -93,14 +23,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
-import com.cybage.dogs_breed_app.NavigationBar
 import com.cybage.dogs_breed_app.R
+import com.cybage.dogs_breed_app.navigation.NavigationBar
 import com.cybage.dogs_breed_app.viewmodel.RandomDogViewModel
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun RandomDogScreen(viewModel: RandomDogViewModel = viewModel(RandomDogViewModel::class.java), navController : NavController) {
     val imageUrlState = viewModel.randomDogImageUrl.collectAsState()
@@ -113,8 +41,8 @@ fun RandomDogScreen(viewModel: RandomDogViewModel = viewModel(RandomDogViewModel
         Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
+                    .padding(16.dp) ,
+                horizontalAlignment = Alignment.CenterHorizontally ,
                 verticalArrangement = Arrangement.Center
         ) {
             val imageUrl = imageUrlState.value
@@ -129,8 +57,8 @@ fun RandomDogScreen(viewModel: RandomDogViewModel = viewModel(RandomDogViewModel
                 )
             } else {
                 Image(
-                        painter = painterResource(id = R.drawable.lucy),
-                        contentDescription = "Placeholder",
+                        painter = painterResource(id = R.drawable.lucy) ,
+                        contentDescription = "Placeholder" ,
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(1f)
@@ -139,7 +67,7 @@ fun RandomDogScreen(viewModel: RandomDogViewModel = viewModel(RandomDogViewModel
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Use LaunchedEffect to launch a coroutine when the composable is first displayed
+
             LaunchedEffect(true) {
                 coroutineScope.launch {
                     viewModel.fetchRandomDogImage()
@@ -159,7 +87,7 @@ fun RandomDogScreen(viewModel: RandomDogViewModel = viewModel(RandomDogViewModel
         }
     }}
 
-
+//checking the network availability:
 fun isNetworkAvailable(context: Context): Boolean {
     val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
@@ -168,3 +96,8 @@ fun isNetworkAvailable(context: Context): Boolean {
     return capabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
 }
 
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewRandomDogScreen() {
+//    RandomDogScreen(RandomDogViewModel(DogRepository()), navController = rememberNavController())
+//}

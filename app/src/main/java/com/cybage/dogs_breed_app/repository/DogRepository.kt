@@ -1,50 +1,56 @@
 package com.cybage.dogs_breed_app.repository
 
+import android.content.Context
+import com.cybage.dogs_breed_app.R
 import com.cybage.dogs_breed_app.api.DogApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class DogRepository {
+class DogRepository(private val context: Context) {
 
     private val dogApiService = DogApiService.create()
 
-
-    //1st Screen:
-    suspend fun getAllDogBreeds() : List<String> {
+    // 1st Screen:
+    suspend fun getAllDogBreeds(): List<String> {
         return withContext(Dispatchers.IO) {
-            val response = dogApiService.getAllDogBreeds()
-            val breedMap = response.message // This is a map of breed groups to lists of breeds
-            breedMap.values.flatten()
+            try {
+                val response = dogApiService.getAllDogBreeds()
+                val breedMap = response.message
+                breedMap.values.flatten()
+            } catch (e: Exception) {
+                val errorMessage = context.getString(R.string.fetch_dog_breeds_error, e.message)
+                throw Exception(errorMessage, e)
+            }
         }
     }
 
-//    //2nd Screen
-
-
+    // 2nd Screen:
     suspend fun getRandomDogImage(): String {
         return dogApiService.getRandomDogImage().message
     }
 
-
-    //3rd Screen:
-
-    suspend fun getDogImagesByBreed(breed : String) : List<String> {
+    // 3rd Screen:
+    suspend fun getDogImagesByBreed(breed: String): List<String> {
         return withContext(Dispatchers.IO) {
-            // Call your API service method to fetch dog images by breed
-            val response = dogApiService.getDogImagesByBreed(breed)
-            // Check if the response status is successful
-            if(response.status == "success") {
-                // Return the list of image URLs from the response
-                response.message
-            } else {
-                // Handle error case
-                throw IllegalStateException("Failed to fetch dog images for breed: $breed")
+            try {
+
+                val response = dogApiService.getDogImagesByBreed(breed)
+
+                if (response.status == "success") {
+
+                    response.message
+                } else {
+
+                    val errorMessage = context.getString(R.string.fetch_dog_images_error, breed)
+                    throw IllegalStateException(errorMessage)
+                }
+            } catch (e: Exception) {
+                val errorMessage = context.getString(R.string.fetch_dog_images_error, breed)
+                throw Exception(errorMessage, e)
             }
         }
     }
 }
-
-
 
 
 
