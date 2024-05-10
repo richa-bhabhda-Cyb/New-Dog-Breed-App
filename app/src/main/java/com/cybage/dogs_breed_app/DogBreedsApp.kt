@@ -95,7 +95,7 @@ fun DogBreedsApp(navController: NavController, title: String = "Breedoze", showB
                         style = MaterialTheme.typography.bodyMedium.copy(color = Color.Black),
                         fontSize = 16.sp,
                         modifier = Modifier
-                            .padding(bottom = 16.dp)
+                            .padding(bottom = 10.dp)
                             .align(Alignment.BottomCenter)
                 )
             }
@@ -176,23 +176,57 @@ fun CardItem(title: String, image: Painter, onClick: () -> Unit) {
 
 
 @Composable
-fun MainNavigation() {
+fun MainNavigation(navController: NavController, isInternetAvailable: Boolean) {
+
+    if (isInternetAvailable)  {
+
+
     val navController = rememberNavController()
+
     NavHost(navController, startDestination = "DogBreedsApp") {
         composable("DogBreedsApp") {
             DogBreedsApp(navController)
         }
         composable("DogListScreen") {
-            DogListScreen(DogViewModel(repository = DogRepository()) ,navController)
+            DogListScreen(DogViewModel(DogRepository()) , navController)
         }
         composable("RandomDogImageScreen") {
             RandomDogScreen(RandomDogViewModel(DogRepository()) , navController)
         }
         composable("DogImageByBreedScreen") {
-            DogImagesByBreed(DogImagesByBreedViewModel(), navController)
+            DogImagesByBreed(DogImagesByBreedViewModel() , navController)
+        }
+    }
+    }
+ else {
+    // Display OfflineScreen when no internet connectivity
+    OfflineScreen()
+}}
+
+
+@Composable
+fun OfflineScreen() {
+    Surface(
+            color = MaterialTheme.colorScheme.background,
+            modifier = Modifier.fillMaxSize()
+    ) {
+        Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                    text = "No Internet Connection",
+                    style = MaterialTheme.typography.bodyLarge
+            )
+            Text(
+                    text = "Please check your internet connection and try again.",
+                    style = MaterialTheme.typography.bodyMedium
+            )
         }
     }
 }
+
 
 @Preview
 @Composable
