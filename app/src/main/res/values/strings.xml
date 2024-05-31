@@ -33,9 +33,11 @@
 
     <!-- res/values/strings.xml -->
 
-        <string name="fetch_dog_breeds_error">Failed to fetch dog breeds. Error code: %d</string>
-        <string name="fetch_random_image_error">Failed to fetch random dog image. Error code: %d</string>
-        <string name="fetch_dog_images_error">Failed to fetch dog images for breed %s</string>
+
+        <string name="fetch_dog_breeds_error">Error fetching dog breeds: %1$d</string>
+        <string name="fetch_random_image_error">Error fetching random dog image: %1$d</string>
+        <string name="fetch_dog_images_error">Error fetching images for breed: %1$s</string>
+
 
 
 

@@ -2,6 +2,7 @@ package com.cybage.dogs_breed_app.repositorytesting
 
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.core.app.ApplicationProvider
 import com.cybage.dogs_breed_app.R
 import com.cybage.dogs_breed_app.api.DogApiService
 import com.cybage.dogs_breed_app.repository.DogRepository
@@ -12,11 +13,17 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [30], manifest = Config.NONE) // Add manifest = Config.NONE
 class ErrorCodesTest {
 
     @get:Rule
@@ -29,6 +36,8 @@ class ErrorCodesTest {
 
     @Before
     fun setUp() {
+        MockitoAnnotations.openMocks(this)
+
         mockWebServer = MockWebServer()
         mockWebServer.start()
         dogApiService = Retrofit.Builder()
@@ -37,165 +46,133 @@ class ErrorCodesTest {
             .build()
             .create(DogApiService::class.java)
 
-        context = Mockito.mock(Context::class.java)
-        Mockito.`when`(context.getString(R.string.fetch_dog_breeds_error, 400))
-            .thenReturn("Bad Request")
-        Mockito.`when`(context.getString(R.string.fetch_dog_breeds_error, 401))
-            .thenReturn("Unauthorized")
-        Mockito.`when`(context.getString(R.string.fetch_dog_breeds_error, 404))
-            .thenReturn("Not Found")
-        Mockito.`when`(context.getString(R.string.fetch_dog_breeds_error, 500))
-            .thenReturn("Internal Server Error")
+        context = ApplicationProvider.getApplicationContext()
 
-        repository = DogRepository(context)
+        // Mock context resources
+        val mockContext = Mockito.mock(Context::class.java)
+        Mockito.`when`(mockContext.getString(R.string.fetch_dog_breeds_error, 400)).thenReturn("Error fetching dog breeds: 400")
+        Mockito.`when`(mockContext.getString(R.string.fetch_dog_breeds_error, 401)).thenReturn("Error fetching dog breeds: 401")
+        Mockito.`when`(mockContext.getString(R.string.fetch_dog_breeds_error, 404)).thenReturn("Error fetching dog breeds: 404")
+        Mockito.`when`(mockContext.getString(R.string.fetch_dog_breeds_error, 500)).thenReturn("Error fetching dog breeds: 500")
+        Mockito.`when`(mockContext.getString(R.string.fetch_random_image_error, 400)).thenReturn("Error fetching random dog image: 400")
+        Mockito.`when`(mockContext.getString(R.string.fetch_random_image_error, 401)).thenReturn("Error fetching random dog image: 401")
+        Mockito.`when`(mockContext.getString(R.string.fetch_random_image_error, 404)).thenReturn("Error fetching random dog image: 404")
+        Mockito.`when`(mockContext.getString(R.string.fetch_random_image_error, 500)).thenReturn("Error fetching random dog image: 500")
+        Mockito.`when`(mockContext.getString(R.string.fetch_dog_images_error, "hound")).thenReturn("Error fetching images for breed: hound")
+
+        repository = DogRepository(mockContext)
+    }
+
+    @After
+    fun tearDown() {
+        mockWebServer.shutdown()
     }
 
     @Test
-    fun testgetAllDogBreedsreturns400error() = runTest {
+    fun testGetAllDogBreedsReturns400Error() = runTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(400))
 
-        try {
-            repository.getAllDogBreeds()
-            assert(false) { "Expected an Exception to be thrown" }
-        } catch (e: IOException) {
-            assert(e.message == "Bad Request")
-        }
+        val exception = runCatching { repository.getAllDogBreeds() }.exceptionOrNull()
+        println("Error message: ${exception?.message}") // Log the error message
+        assert(exception is IOException && exception.message == "Error fetching dog breeds: 400")
     }
 
     @Test
-    fun testgetAllDogBreedsreturns401error() = runTest {
+    fun testGetAllDogBreedsReturns401Error() = runTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(401))
 
-        try {
-            repository.getAllDogBreeds()
-            assert(false) { "Expected an Exception to be thrown" }
-        } catch (e: IOException) {
-            assert(e.message == "Unauthorized")
-        }
+        val exception = runCatching { repository.getAllDogBreeds() }.exceptionOrNull()
+        println("Error message: ${exception?.message}") // Log the error message
+        assert(exception is IOException && exception.message == "Error fetching dog breeds: 401")
     }
 
     @Test
-    fun testgetAllDogBreedsreturns404error()= runTest {
+    fun testGetAllDogBreedsReturns404Error() = runTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(404))
 
-        try {
-            repository.getAllDogBreeds()
-            assert(false) { "Expected an Exception to be thrown" }
-        } catch (e: IOException) {
-            assert(e.message == "Not Found")
-        }
+        val exception = runCatching { repository.getAllDogBreeds() }.exceptionOrNull()
+        println("Error message: ${exception?.message}") // Log the error message
+        assert(exception is IOException && exception.message == "Error fetching dog breeds: 404")
     }
 
     @Test
-    fun testgetAllDogBreedsreturns500error() = runTest {
+    fun testGetAllDogBreedsReturns500Error() = runTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(500))
 
-        try {
-            repository.getAllDogBreeds()
-            assert(false) { "Expected an Exception to be thrown" }
-        } catch (e: IOException) {
-            assert(e.message == "Internal Server Error")
-        }
+        val exception = runCatching { repository.getAllDogBreeds() }.exceptionOrNull()
+        println("Error message: ${exception?.message}") // Log the error message
+        assert(exception is IOException && exception.message == "Error fetching dog breeds: 500")
     }
 
     @Test
-    fun testgetRandomDogImagereturns400error() = runTest {
+    fun testGetRandomDogImageReturns400Error() = runTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(400))
 
-        try {
-            repository.getRandomDogImage()
-            assert(false) { "Expected an Exception to be thrown" }
-        } catch (e: IOException) {
-            assert(e.message == "Bad Request")
-        }
+        val exception = runCatching { repository.getRandomDogImage() }.exceptionOrNull()
+        println("Error message: ${exception?.message}") // Log the error message
+        assert(exception is IOException && exception.message == "Error fetching random dog image: 400")
     }
 
     @Test
-    fun testgetRandomDogImagereturns401error() = runTest {
+    fun testGetRandomDogImageReturns401Error() = runTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(401))
 
-        try {
-            repository.getRandomDogImage()
-            assert(false) { "Expected an Exception to be thrown" }
-        } catch (e: IOException) {
-            assert(e.message == "Unauthorized")
-        }
+        val exception = runCatching { repository.getRandomDogImage() }.exceptionOrNull()
+        println("Error message: ${exception?.message}") // Log the error message
+        assert(exception is IOException && exception.message == "Error fetching random dog image: 401")
     }
 
     @Test
-    fun testgetRandomDogImagereturns404error() = runTest {
+    fun testGetRandomDogImageReturns404Error() = runTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(404))
 
-        try {
-            repository.getRandomDogImage()
-            assert(false) { "Expected an Exception to be thrown" }
-        } catch (e: IOException) {
-            assert(e.message == "Not Found")
-        }
+        val exception = runCatching { repository.getRandomDogImage() }.exceptionOrNull()
+        println("Error message: ${exception?.message}") // Log the error message
+        assert(exception is IOException && exception.message == "Error fetching random dog image: 404")
     }
 
     @Test
-    fun testgetRandomDogImagereturns500error() = runTest {
+    fun testGetRandomDogImageReturns500Error() = runTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(500))
 
-        try {
-            repository.getRandomDogImage()
-            assert(false) { "Expected an Exception to be thrown" }
-        } catch (e: IOException) {
-            assert(e.message == "Internal Server Error")
-        }
+        val exception = runCatching { repository.getRandomDogImage() }.exceptionOrNull()
+        println("Error message: ${exception?.message}") // Log the error message
+        assert(exception is IOException && exception.message == "Error fetching random dog image: 500")
     }
 
     @Test
-    fun testgetDogImagesByBreedreturns400error() = runTest {
+    fun testGetDogImagesByBreedReturns400Error() = runTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(400))
 
-        try {
-            repository.getDogImagesByBreed("hound")
-            assert(false) { "Expected an Exception to be thrown" }
-        } catch (e: IOException) {
-            assert(e.message == "Bad Request")
-        }
+        val exception = runCatching { repository.getDogImagesByBreed("hound") }.exceptionOrNull()
+        println("Error message: ${exception?.message}") // Log the error message
+        assert(exception is IOException && exception.message == "Error fetching images for breed: hound")
     }
 
     @Test
-    fun testgetDogImagesByBreedreturns401error() = runTest {
+    fun testGetDogImagesByBreedReturns401Error() = runTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(401))
 
-        try {
-            repository.getDogImagesByBreed("hound")
-            assert(false) { "Expected an Exception to be thrown" }
-        } catch (e: IOException) {
-            assert(e.message == "Unauthorized")
-        }
+        val exception = runCatching { repository.getDogImagesByBreed("hound") }.exceptionOrNull()
+        println("Error message: ${exception?.message}") // Log the error message
+        assert(exception is IOException && exception.message == "Error fetching images for breed: Unauthorized")
     }
 
     @Test
-    fun testgetDogImagesByBreedreturns404error() = runTest {
+    fun testGetDogImagesByBreedReturns404Error() = runTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(404))
 
-        try {
-            repository.getDogImagesByBreed("hound")
-            assert(false) { "Expected an Exception to be thrown" }
-        } catch (e: IOException) {
-            assert(e.message == "Not Found")
-        }
+        val exception = runCatching { repository.getDogImagesByBreed("hound") }.exceptionOrNull()
+        println("Error message: ${exception?.message}") // Log the error message
+        assert(exception is IOException && exception.message == "Error fetching images for breed: Not Found")
     }
 
     @Test
-    fun testgetDogImagesByBreedreturns500error() = runTest {
+    fun testGetDogImagesByBreedReturns500Error() = runTest {
         mockWebServer.enqueue(MockResponse().setResponseCode(500))
 
-        try {
-            repository.getDogImagesByBreed("hound")
-            assert(false) { "Expected an Exception to be thrown" }
-        } catch (e: IOException) {
-            assert(e.message == "Internal Server Error")
-        }
+        val exception = runCatching { repository.getDogImagesByBreed("hound") }.exceptionOrNull()
+        println("Error message: ${exception?.message}") // Log the error message
+        assert(exception is IOException && exception.message == "Error fetching images for breed: Internal Server Error")
     }
-
-@After
-fun tearDown() {
-    mockWebServer.shutdown()
-}
 }

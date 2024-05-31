@@ -171,7 +171,15 @@ dependencies {
 
     //Robolectric:
     testImplementation (libs.robolectric)
+    implementation(kotlin("test"))
 
+    //for 1stscreen test:
+    // build.gradle
+
+        testImplementation (libs.kotlin.test.junit)
+
+        testImplementation (libs.mockito.kotlin) // For Kotlin support
+        testImplementation (libs.kotlinx.coroutines.test.v152)
 
 
 
