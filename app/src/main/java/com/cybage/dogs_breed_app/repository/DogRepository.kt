@@ -1,56 +1,74 @@
 package com.cybage.dogs_breed_app.repository
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.cybage.dogs_breed_app.R
 import com.cybage.dogs_breed_app.api.DogApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.IOException
 
 class DogRepository(private val context: Context) {
 
     private val dogApiService = DogApiService.create()
 
-    // 1st Screen:
+    @SuppressLint("StringFormatMatches")
     suspend fun getAllDogBreeds(): List<String> {
         return withContext(Dispatchers.IO) {
             try {
                 val response = dogApiService.getAllDogBreeds()
-                val breedMap = response.message
-                breedMap.values.flatten()
+                if (response.isSuccessful) {
+                    response.body()?.message?.values?.flatten() ?: emptyList()
+                } else {
+                    val errorMessage = context.getString(R.string.fetch_dog_breeds_error, response.code())
+                    throw IOException(errorMessage) // Change Exception to IOException
+                }
+            } catch (e: IOException) {
+                throw e
             } catch (e: Exception) {
                 val errorMessage = context.getString(R.string.fetch_dog_breeds_error, e.message)
-                throw Exception(errorMessage, e)
+                throw IOException(errorMessage, e)
             }
         }
     }
 
-    // 2nd Screen:
+    @SuppressLint("StringFormatMatches")
     suspend fun getRandomDogImage(): String {
-        return dogApiService.getRandomDogImage().message
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = dogApiService.getRandomDogImage()
+                if (response.isSuccessful) {
+                    response.body()?.message ?: throw IOException("Invalid response") // Change Exception to IOException
+                } else {
+                    val errorMessage = context.getString(R.string.fetch_random_image_error, response.code())
+                    throw IOException(errorMessage) // Change Exception to IOException
+                }
+            } catch (e: IOException) {
+                throw e
+            } catch (e: Exception) {
+                val errorMessage = context.getString(R.string.fetch_random_image_error, e.message)
+                throw IOException(errorMessage, e)
+            }
+        }
     }
 
-    // 3rd Screen:
     suspend fun getDogImagesByBreed(breed: String): List<String> {
         return withContext(Dispatchers.IO) {
             try {
-
                 val response = dogApiService.getDogImagesByBreed(breed)
-
-                if (response.status == "success") {
-
-                    response.message
+                if (response.isSuccessful && response.body()?.status == "success") {
+                    response.body()?.message ?: emptyList()
                 } else {
-
                     val errorMessage = context.getString(R.string.fetch_dog_images_error, breed)
-                    throw IllegalStateException(errorMessage)
+                    throw IOException(errorMessage) // Change Exception to IOException
                 }
+            } catch (e: IOException) {
+                throw e
             } catch (e: Exception) {
                 val errorMessage = context.getString(R.string.fetch_dog_images_error, breed)
-                throw Exception(errorMessage, e)
+                throw IOException(errorMessage, e)
             }
         }
     }
+
 }
-
-
-

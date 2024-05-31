@@ -29,14 +29,15 @@
         <string name="error_message">Error: </string>
 
 
-    <!--    ViewModels-->
-        <!--1st Screen :-->
 
-          <string name="fetch_dog_breeds_error">Failed to fetch dog breeds: %1$s</string>
 
-        <!--2nd Screen    -->
+    <!-- res/values/strings.xml -->
 
-        <string name="fetch_dog_images_error">Failed to fetch dog images for breed: %1$s</string>
+        <string name="fetch_dog_breeds_error">Failed to fetch dog breeds. Error code: %d</string>
+        <string name="fetch_random_image_error">Failed to fetch random dog image. Error code: %d</string>
+        <string name="fetch_dog_images_error">Failed to fetch dog images for breed %s</string>
+
+
 
 
 </resources>

@@ -154,6 +154,28 @@ dependencies {
     // MockwebServer:
     testImplementation(libs.mockwebserver)
 
+
+
+    //for DogRepoTestcases:
+
+
+
+    testImplementation (libs.junit)
+    testImplementation (libs.kotlinx.coroutines.test.v160)
+    testImplementation (libs.mockito.core)
+    testImplementation (libs.mockito.inline)
+    testImplementation (libs.androidx.core.testing.v210)
+
+    //MOCK INLINE:
+    testImplementation (libs.mockito.inline.v420)
+
+    //Robolectric:
+    testImplementation (libs.robolectric)
+
+
+
+
+
 }
 
 
