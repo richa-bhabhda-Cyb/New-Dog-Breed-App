@@ -1,50 +1,74 @@
 package com.cybage.dogs_breed_app.repository
 
+import android.annotation.SuppressLint
+import android.content.Context
+import com.cybage.dogs_breed_app.R
 import com.cybage.dogs_breed_app.api.DogApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.IOException
 
-class DogRepository {
+class DogRepository(private val context: Context) {
 
     private val dogApiService = DogApiService.create()
 
-
-    //1st Screen:
-    suspend fun getAllDogBreeds() : List<String> {
+    @SuppressLint("StringFormatMatches")
+    suspend fun getAllDogBreeds(): List<String> {
         return withContext(Dispatchers.IO) {
-            val response = dogApiService.getAllDogBreeds()
-            val breedMap = response.message // This is a map of breed groups to lists of breeds
-            breedMap.values.flatten()
-        }
-    }
-
-//    //2nd Screen
-
-
-    suspend fun getRandomDogImage(): String {
-        return dogApiService.getRandomDogImage().message
-    }
-
-
-    //3rd Screen:
-
-    suspend fun getDogImagesByBreed(breed : String) : List<String> {
-        return withContext(Dispatchers.IO) {
-            // Call your API service method to fetch dog images by breed
-            val response = dogApiService.getDogImagesByBreed(breed)
-            // Check if the response status is successful
-            if(response.status == "success") {
-                // Return the list of image URLs from the response
-                response.message
-            } else {
-                // Handle error case
-                throw IllegalStateException("Failed to fetch dog images for breed: $breed")
+            try {
+                val response = dogApiService.getAllDogBreeds()
+                if (response.isSuccessful) {
+                    response.body()?.message?.values?.flatten() ?: emptyList()
+                } else {
+                    val errorMessage = context.getString(R.string.fetch_dog_breeds_error, response.code())
+                    throw IOException(errorMessage) // Change Exception to IOException
+                }
+            } catch (e: IOException) {
+                throw e
+            } catch (e: Exception) {
+                val errorMessage = context.getString(R.string.fetch_dog_breeds_error, e.message)
+                throw IOException(errorMessage, e)
             }
         }
     }
+
+    @SuppressLint("StringFormatMatches")
+    suspend fun getRandomDogImage(): String {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = dogApiService.getRandomDogImage()
+                if (response.isSuccessful) {
+                    response.body()?.message ?: throw IOException("Invalid response") // Change Exception to IOException
+                } else {
+                    val errorMessage = context.getString(R.string.fetch_random_image_error, response.code())
+                    throw IOException(errorMessage) // Change Exception to IOException
+                }
+            } catch (e: IOException) {
+                throw e
+            } catch (e: Exception) {
+                val errorMessage = context.getString(R.string.fetch_random_image_error, e.message)
+                throw IOException(errorMessage, e)
+            }
+        }
+    }
+
+    suspend fun getDogImagesByBreed(breed: String): List<String> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = dogApiService.getDogImagesByBreed(breed)
+                if (response.isSuccessful && response.body()?.status == "success") {
+                    response.body()?.message ?: emptyList()
+                } else {
+                    val errorMessage = context.getString(R.string.fetch_dog_images_error, breed)
+                    throw IOException(errorMessage) // Change Exception to IOException
+                }
+            } catch (e: IOException) {
+                throw e
+            } catch (e: Exception) {
+                val errorMessage = context.getString(R.string.fetch_dog_images_error, breed)
+                throw IOException(errorMessage, e)
+            }
+        }
+    }
+
 }
-
-
-
-
-
